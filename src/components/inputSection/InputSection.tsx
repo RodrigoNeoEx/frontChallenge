@@ -2,24 +2,40 @@ import { useState } from "react";
 import Table from "../table/Table";
 import { get } from "../../utils/axios";
 import { formatCep } from "../../utils/formatCep";
+import { useDispatch, useSelector } from "react-redux";
+import { addCep } from "../../redux/slices/cepSlice";
+import { resolveSoa } from "dns";
 
 const InputSection = () => {
 
   const [value, setValue] = useState("");
   const [data, setData] = useState<any>([]);
+  const dispatch = useDispatch();
+  const cepList = useSelector((state: any) => state.cep.list);
+
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = e.target.value;
     const formattedValue = formatCep(newValue);
     setValue(formattedValue);
 
-
     if (formattedValue.replace(/\D/g, "").length === 8) {
-      const cep = formattedValue.replace(/\D/g, ""); 
+      const cep = formattedValue.replace(/\D/g, "");
+
       const url = `https://viacep.com.br/ws/${cep}/json/`;
-      get(url, "CEP não encontrado").then((res) => setData(res));     
-  };
-}
+      try {
+        const res = await get(url, "CEP não encontrado");
+        setData(res);
+        // Verifica se o resultado da API é válido, se não é um erro e se o CEP não está duplicado
+        if (res && !res.erro && !cepList.some((item: any) => item.cep === res.cep)) {
+          dispatch(addCep(res));
+        }
+
+      } catch (error) {
+        console.error("Erro ao buscar o CEP:", error);
+      }
+    }
+  }
 
   return (    
   <div className="bg-overall px-6 sm:py-32 lg:px-8">
