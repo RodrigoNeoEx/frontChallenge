@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Table from "../table/Table";
 
 const InputSection = () => {
 
@@ -33,6 +34,7 @@ const InputSection = () => {
         </div> 
       </div>      
     </form>
+    <Table/>
   </div>
 
  
