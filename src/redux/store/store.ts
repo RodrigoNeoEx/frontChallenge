@@ -1,11 +1,11 @@
 // src/redux/store/store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';  // Para combinar os reducers
-import genericReducer from '../slices/genericSlice';
+import cepReducer from '../slices/cepSlice';
 
 
 const rootReducer = combineReducers({
-  generic: genericReducer,  // Combine o reducer do usuário
+  cep: cepReducer,  // Combine o reducer do usuário
 });
 
 export const store = configureStore({
