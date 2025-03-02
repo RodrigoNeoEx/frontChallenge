@@ -7,17 +7,19 @@ const Table = ({data}: any) => {
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
             <table
-              className="min-w-full text-left text-sm font-light text-surface dark:text-white">         
+              className="min-w-full text-left text-sm font-light">         
               <tbody>
                 <tr className="border-b border-neutral-200 dark:border-white/10">
-                {data?.map((item: any, i: number) => {
-                  return (
-                    <React.Fragment key={i}>
-                      <td className="font-medium w-1/4 text-left">{item.key}</td>
-                      <td className="pl-2 text-left">{item.content}</td>
-                    </React.Fragment>
-                  )
-                })}                  
+                  {Object.entries(data).map(([key, value]) => (
+                    value 
+                    ? (
+                      <tr key={key}>
+                        <td className="border px-4 py-2">{key}</td>
+                        <td className="border px-4 py-2 w-full">{value as React.ReactNode}</td>
+                      </tr>
+                    )
+                    : <></>
+                  ))}                 
                 </tr>                
               </tbody>
             </table>
