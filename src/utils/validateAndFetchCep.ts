@@ -1,8 +1,5 @@
 import { get } from "./axios";
-
-function checkStringCEP(cep: string) {
-    return cep.replace(/\D/g, "");
-}
+import normalizeCep from "./normalizeCEP";
 
 async function validateAndFetchCep(
     cep: string,
@@ -10,10 +7,10 @@ async function validateAndFetchCep(
     invalidCeps: string[],
     setInvalidCeps: (ceps: string[]) => void
 ) {
-    const validCEP = checkStringCEP(cep);
+    const validCEP = normalizeCep(cep);
 
     const checkStorage = JSON.parse(localStorage.getItem('checkStorage') || '[]');
-    const savedCEP = checkStorage.find((item: any) => checkStringCEP(item.cep) === validCEP);
+    const savedCEP = checkStorage.find((item: any) => normalizeCep(item.cep) === validCEP);
 
     if (savedCEP) {
         setData(savedCEP); 
