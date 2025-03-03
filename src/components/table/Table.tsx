@@ -1,5 +1,3 @@
-import React from "react";
-
 const Table = ({data}: any) => {
   return (
     <div className="flex flex-col bg-gradient-to-r from-[#04C1F3] to-[#13679F] w-full transition-all transition-discrete">
@@ -11,13 +9,13 @@ const Table = ({data}: any) => {
               <tbody>
                 <tr className="border-b border-neutral-200">
                   {Object.entries(data).map(([key, value]) => (
-             
+                    String(value).length > 0 &&                       
                       <tr key={key}>
                         <td className="border px-4 py-2">{key}</td>
                         <td className="border px-4 py-2 w-full">
                           {key === 'erro' ? 'CEP não econtrado!' : String(value)}
                         </td>
-                      </tr>        
+                      </tr> 
                   ))}                 
                 </tr>                
               </tbody>

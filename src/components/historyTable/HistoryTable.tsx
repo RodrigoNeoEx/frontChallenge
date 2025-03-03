@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import Table from "../table/Table";
 
 const HistoryTable = () => {
+  const cepList = useSelector((state: any) => state.cep.list);
 
   return (
     <div className="bg-overall px-6 py-6 sm:py-32 lg:px-8">
@@ -8,13 +10,7 @@ const HistoryTable = () => {
         <h2 className="text-balance text-4xl font-semibold tracking-tight text-primary sm:text-5xl">
           Veja seu Historico de Pesquisas:
         </h2>
-
-        {/* {dataList.map((data, index) => {
-          return (
-            <Table key={index} data={data}/>
-          )
-        })} */}
-
+        {cepList.map((data: any, index: any) => <Table key={index} data={data} />)}
       </div>
     </div>
   )
