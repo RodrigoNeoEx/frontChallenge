@@ -1,4 +1,3 @@
-// src/redux/slices/cepSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CepData {
@@ -13,7 +12,7 @@ interface CepData {
   gia: string;
   ddd: string;
   siafi: string;
-  [key: string]: string; // Pode ter outras propriedades do objeto
+  [key: string]: string;
 }
 
 interface CepState {
@@ -29,10 +28,10 @@ const cepSlice = createSlice({
   initialState,
   reducers: {
     addCep: (state, action: PayloadAction<CepData>) => {
-      state.list.push(action.payload); // Adiciona o novo CEP à lista
+      state.list.push(action.payload);
     },
     hydrateCeps: (state, action) => {
-      state.list = action.payload;  // Sobrescreve a lista com o que está no localStorage
+      state.list = action.payload; 
     },
   },
 });
