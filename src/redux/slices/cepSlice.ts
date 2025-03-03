@@ -25,15 +25,18 @@ const initialState: CepState = {
 };
 
 const cepSlice = createSlice({
-  name: 'Lista de CEPs',
+  name: 'CEP',
   initialState,
   reducers: {
     addCep: (state, action: PayloadAction<CepData>) => {
       state.list.push(action.payload); // Adiciona o novo CEP à lista
     },
+    hydrateCeps: (state, action) => {
+      state.list = action.payload;  // Sobrescreve a lista com o que está no localStorage
+    },
   },
 });
 
-export const { addCep } = cepSlice.actions;
+export const { addCep, hydrateCeps } = cepSlice.actions;
 
 export default cepSlice.reducer;

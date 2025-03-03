@@ -1,6 +1,6 @@
 const Table = ({data}: any) => {
   return (
-    <div className="flex flex-col bg-gradient-to-r from-[#04C1F3] to-[#13679F] w-full transition-all transition-discrete">
+    <div className={`flex flex-col bg-gradient-to-r from-[#04C1F3] to-[#13679F] w-full`}>
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
