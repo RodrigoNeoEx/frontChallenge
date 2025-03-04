@@ -29,7 +29,7 @@ const InputSection = () => {
     const normalizedCep = normalizeCep(value);
 
     if (cepCache[normalizedCep]) {
-        setData(cepCache[normalizedCep]);  // <- Cache hit: usa direto o cache e não consulta API
+        setData(cepCache[normalizedCep]);
         return;
     }
 
@@ -61,8 +61,8 @@ const InputSection = () => {
   const alreadyExist = cepList.some((item: any) => normalizeCep(item.cep) === normalizeCep(value));
 
   return (
-    <div className="bg-overall px-6 sm:py-32 lg:px-8">
-      <form className="mx-auto mt-10 max-w-xl sm:mt-20" onSubmit={(e) => e.preventDefault()}>
+    <div className="px-6 sm:py-32 lg:px-8">
+      <form className="mx-auto mt-5 max-w-xl sm:mt-20" onSubmit={(e) => e.preventDefault()}>
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
             <label htmlFor="input-cep" className="block text-sm/6 font-semibold text-gray-900">

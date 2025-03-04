@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header className="sm:h-32 h-20 bg-overall shadow-standard flex justify-between align-center">
+    <header className="sm:h-32 h-20 bg-overall shadow-standard flex justify-between align-center fixed z-10">
       <div className="px-3 content-center">
         <img 
           src="/logo.webp" 

@@ -28,8 +28,8 @@ export function saveAdress(
         enderecosSalvos.push(cepData);
         localStorage.setItem('enderecosSalvos', JSON.stringify(enderecosSalvos));
 
-        dispatch(addCep(cepData));  // 🔥 Atualiza Redux imediatamente
-        onSuccess(); // dispara o sucesso
+        dispatch(addCep(cepData)); 
+        onSuccess();
     } catch (error) {
         console.error("Erro ao salvar no LocalStorage", error);
     }
