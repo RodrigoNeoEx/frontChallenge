@@ -7,6 +7,8 @@ import { saveAdress } from "../../utils/saveAdress";
 import useHydrateCeps from "../../hooks/useHydrateCeps";
 import normalizeCep from "../../utils/normalizeCEP";
 import { cacheReducer } from "../../hooks/useCepCache";
+import { Field, Input, Label } from '@headlessui/react'
+import clsx from 'clsx'
 
 
 const InputSection = () => {
@@ -27,16 +29,12 @@ const InputSection = () => {
 
   const handleValidation = async () => {
     const normalizedCep = normalizeCep(value);
-
     if (cepCache[normalizedCep]) {
-        setData(cepCache[normalizedCep]);  // <- Cache hit: usa direto o cache e não consulta API
+        setData(cepCache[normalizedCep]);
         return;
     }
-
     await validateAndFetchCep(normalizedCep, setData, invalidCeps, setInvalidCeps, dispatchCache);
 };
-
-
 
   useEffect(() => {
     console.log("Cache atual de CEPs:", cepCache);
@@ -61,27 +59,28 @@ const InputSection = () => {
   const alreadyExist = cepList.some((item: any) => normalizeCep(item.cep) === normalizeCep(value));
 
   return (
-    <div className="bg-overall px-6 sm:py-32 lg:px-8">
-      <form className="mx-auto mt-10 max-w-xl sm:mt-20" onSubmit={(e) => e.preventDefault()}>
-        <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-          <div>
-            <label htmlFor="input-cep" className="block text-sm/6 font-semibold text-gray-900">
-              Insira o número do CEP abaixo:
-            </label>
-            <div className="mt-2.5 flex">
-              <input
-                type="text"
-                name="input-cep"
-                id="input-cep"
-                placeholder="00000000"
-                value={value}
-                onChange={handleChange}
-                onBlur={handleValidation}
-                onKeyDown={(e) => e.key === "Enter" && handleValidation()}
-                maxLength={9}
-                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600"
-              />
-            </div>
+    <div className="px-6 sm:py-5 lg:px-8 pb-4">
+      <form className="mx-auto mt-5 max-w-xl sm:mt-auto" onSubmit={(e) => e.preventDefault()}>
+        <div className="grid grid-cols-1 gap-x-8 gap-y-6">         
+          <Field>
+            <Label className="text-sm/6 font-medium text-primary">Insira o número do CEP abaixo:</Label>        
+            <Input
+              className={clsx(
+                'mt-3 block w-full rounded-lg border-none bg-secondary/4 py-1.5 px-3 text-sm/6 text-primary',
+                'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
+              )}
+              type="text"
+                    name="input-cep"
+                    id="input-cep"
+                    placeholder="00000-000"
+                    value={value}
+                    onChange={handleChange}
+                    onBlur={handleValidation}
+                    onKeyDown={(e) => e.key === "Enter" && handleValidation()}
+                    maxLength={9}
+            />
+            {data &&
+            
             <button
               className={`w-full font-bold py-2 px-4 inline-flex items-center mt-4 justify-center ${
                 alreadyExist ? "bg-[#13679f] cursor-not-allowed text-white" : "bg-gradient-to-r from-[#04C1F3] to-[#13679F]"
@@ -90,13 +89,14 @@ const InputSection = () => {
               onClick={handleSalvar}
               disabled={alreadyExist}
             >
-              {alreadyExist ? "CEP já salvo" : "Salvar pesquisa"}
-              
+              {alreadyExist ? "CEP já salvo" : "Salvar pesquisa"}              
             </button>
-          </div>
+            }
+          </Field>
+          {data && <Table data={data || {}} />}
+        
         </div>
       </form>
-      <Table data={data || {}} />
     </div>
   );
 };
