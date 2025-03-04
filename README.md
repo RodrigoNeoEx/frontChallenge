@@ -1,46 +1,147 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 📦 Projeto: CEP Challenge
 
-## Available Scripts
+Este é um desafio técnico desenvolvido com **React 18**, onde o objetivo é criar uma aplicação para consulta de CEPs utilizando a API do ViaCEP, com persistência local, cache para otimizar requisições e histórico de buscas.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📂 Estrutura do Projeto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+src
+├── App.tsx
+├── components
+│   ├── header
+│   │   └── Header.tsx
+│   ├── hero
+│   │   └── Hero.tsx
+│   ├── historyTable
+│   │   └── HistoryTable.tsx
+│   ├── inputSection
+│   │   └── InputSection.tsx
+│   └── table
+│       └── Table.tsx
+├── hooks
+│   ├── useCepCache.ts
+│   └── useHydrateCeps.tsx
+├── index.css
+├── index.tsx
+├── react-app-env.d.ts
+├── redux
+│   ├── slices
+│   │   └── cepSlice.ts
+│   └── store
+│       └── store.ts
+├── reportWebVitals.ts
+└── utils
+    ├── axios.ts
+    ├── formatCep.ts
+    ├── normalizeCEP.ts
+    ├── saveAdress.ts
+    └── validateAndFetchCep.ts
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠️ Tecnologias Utilizadas e Motivos
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### ⚛️ React 18
+- Framework principal da aplicação.
+- Escolhido por sua flexibilidade, componentização e alta produtividade no desenvolvimento.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🎨 Tailwind CSS
+- Framework de estilos utilitário.
+- Motivo: Permite criar layouts responsivos e modernos de forma rápida, com classes semânticas e manutenção simplificada.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🗃️ Redux Toolkit
+- Gerenciador de estado global.
+- Motivo: Facilitou o gerenciamento do histórico de CEPs e a hidratação inicial com dados do `localStorage`. Além disso, garante consistência entre diferentes componentes que consomem os mesmos dados.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 🚀 TypeScript
+- Superset do JavaScript.
+- Motivo: Tipagem estática para maior segurança, previsibilidade e melhor experiência de desenvolvimento (autocompletes, validações).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 🌐 Axios
+- Cliente HTTP.
+- Motivo: Facilita a comunicação com a API do ViaCEP, com suporte nativo a interceptors e configuração centralizada (ex.: `axios.ts`).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+### 📥 Headless UI
+- Biblioteca de componentes acessíveis e desprovidos de estilo.
+- Motivo: Usada para o `Listbox` (select do histórico de pesquisas), garantindo navegação por teclado e boa acessibilidade (ARIA).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 📄 ESLint + Prettier
+- Ferramentas de linting e formatação.
+- Motivo: Garantir consistência de código e evitar problemas comuns (ex.: regras de hooks, formatação padronizada).
+
+---
+
+### 🧰 Custom Hooks
+- `useCepCache`: Hook responsável por centralizar o cache local de CEPs.
+- `useHydrateCeps`: Hook que hidrata o Redux com o histórico salvo no `localStorage`.
+- Motivo: Separação clara de responsabilidades e reuso de lógica em múltiplos componentes.
+
+---
+
+### 📊 LocalStorage
+- Armazenamento persistente no navegador.
+- Motivo: Necessário para persistir o histórico de pesquisas, mesmo após o usuário fechar a página.
+
+---
+
+### 🌐 API ViaCEP
+- Serviço gratuito para consulta de endereços a partir do CEP.
+- URL Base: `https://viacep.com.br/ws/`
+
+---
+
+## 💡 Funcionalidades Implementadas
+
+✅ Campo de entrada para o CEP.  
+✅ Consulta à API ViaCEP.  
+✅ Preenchimento automático do endereço.  
+✅ Validação de CEP duplicado.  
+✅ Salvamento no histórico com persistência local.  
+✅ Histórico exibido em select dinâmico.  
+✅ Exibição detalhada do endereço salvo em tabela.  
+✅ Cache local para evitar requisições desnecessárias.  
+✅ Responsividade (Mobile First).
+
+---
+
+## 📱 Mobile First
+
+O layout foi construído inicialmente pensando em dispositivos móveis, garantindo boa usabilidade em telas pequenas. Ajustes para telas maiores foram aplicados com breakpoints do Tailwind.
+
+---
+
+## 🚀 Como Executar
+
+```bash
+# Clonar o repositório
+git clone https://github.com/RodrigoNeoEx/frontChallenge.git
+
+# Instalar dependências
+npm install
+
+# Rodar o projeto
+npm run dev
+```
+
+---
+
+## 📮 Contato
+
+Projeto desenvolvido por [Rodrigo NeoEx](https://github.com/RodrigoNeoEx).  
+Dúvidas ou sugestões? Abra uma issue no repositório.
