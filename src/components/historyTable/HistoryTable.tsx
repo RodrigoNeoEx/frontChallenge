@@ -20,8 +20,8 @@ const HistoryTable = () => {
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-balance text-3xl font-semibold tracking-tight text-primary ">
         {cepList.length === 0 
-          ? 'Salve suas pesquisas para poder consultar novamente abaixo.'
-          : 'Selecione Abaixo seu Histórico Salvo de Pesquisas:'
+          ? 'Salve suas pesquisas para poder consultar abaixo.'
+          : "Selecione abaixo seus CEPS's salvos para visualizar:"
         }          
         </h2>
         {cepList.length !== 0 &&
@@ -46,7 +46,6 @@ const HistoryTable = () => {
               </ListboxOptions>
             </div>
           </Listbox>
-
 
           {selected && (
             <div className="mt-4">
