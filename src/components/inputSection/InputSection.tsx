@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import Table from "../table/Table";
 import { formatCep } from "../../utils/formatCep";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import validateAndFetchCep from "../../utils/validateAndFetchCep";
 import { saveAdress } from "../../utils/saveAdress";
 import useHydrateCeps from "../../hooks/useHydrateCeps";
 import normalizeCep from "../../utils/normalizeCEP";
+import { cacheReducer } from "../../hooks/useCepCache";
 
 
 const InputSection = () => {
@@ -14,6 +15,7 @@ const InputSection = () => {
   const [invalidCeps, setInvalidCeps] = useState<string[]>([]);
   const [isSaved, setIsSaved] = useState(false);
   
+  const [cepCache, dispatchCache] = useReducer(cacheReducer, {});  
   const dispatch = useDispatch();
   const cepList = useSelector((state: any) => state.cep.list);
 
@@ -24,9 +26,21 @@ const InputSection = () => {
   };
 
   const handleValidation = async () => {
-    const cep = normalizeCep(value);
-    await validateAndFetchCep(cep, setData, invalidCeps, setInvalidCeps);
-  };
+    const normalizedCep = normalizeCep(value);
+
+    if (cepCache[normalizedCep]) {
+        setData(cepCache[normalizedCep]);  // <- Cache hit: usa direto o cache e não consulta API
+        return;
+    }
+
+    await validateAndFetchCep(normalizedCep, setData, invalidCeps, setInvalidCeps, dispatchCache);
+};
+
+
+
+  useEffect(() => {
+    console.log("Cache atual de CEPs:", cepCache);
+}, [cepCache]);
 
   const handleSalvar = () => {
     if (!data || !data.cep) {
@@ -77,6 +91,7 @@ const InputSection = () => {
               disabled={alreadyExist}
             >
               {alreadyExist ? "CEP já salvo" : "Salvar pesquisa"}
+              
             </button>
           </div>
         </div>
