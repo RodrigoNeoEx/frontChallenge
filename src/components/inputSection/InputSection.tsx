@@ -59,9 +59,9 @@ const InputSection = () => {
   const alreadyExist = cepList.some((item: any) => normalizeCep(item.cep) === normalizeCep(value));
 
   return (
-    <div className="px-6 sm:py-32 lg:px-8 pb-4">
-      <form className="mx-auto mt-5 max-w-xl sm:mt-20" onSubmit={(e) => e.preventDefault()}>
-        <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">         
+    <div className="px-6 sm:py-5 lg:px-8 pb-4">
+      <form className="mx-auto mt-5 max-w-xl sm:mt-auto" onSubmit={(e) => e.preventDefault()}>
+        <div className="grid grid-cols-1 gap-x-8 gap-y-6">         
           <Field>
             <Label className="text-sm/6 font-medium text-primary">Insira o número do CEP abaixo:</Label>        
             <Input
@@ -79,6 +79,8 @@ const InputSection = () => {
                     onKeyDown={(e) => e.key === "Enter" && handleValidation()}
                     maxLength={9}
             />
+            {data &&
+            
             <button
               className={`w-full font-bold py-2 px-4 inline-flex items-center mt-4 justify-center ${
                 alreadyExist ? "bg-[#13679f] cursor-not-allowed text-white" : "bg-gradient-to-r from-[#04C1F3] to-[#13679F]"
@@ -89,10 +91,12 @@ const InputSection = () => {
             >
               {alreadyExist ? "CEP já salvo" : "Salvar pesquisa"}              
             </button>
+            }
           </Field>
+          {data && <Table data={data || {}} />}
+        
         </div>
       </form>
-      <Table data={data || {}} />
     </div>
   );
 };

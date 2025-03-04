@@ -6,9 +6,9 @@
   height: 100vh;
 }
 
-html, body {
+/* html, body {
   overflow: hidden;
-}
+} */
 
 @media (max-width: 639px) {
   html, body {

@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className="flex flex-col min-h-screen bg-overall">
       <Header />
-      <main className="flex flex-col min-h-[calc(100vh-125px)] ">
+      <main className="flex flex-col min-h-[calc(100vh-125px)] sm:items-center sm:min-h-[74vh] ">
         <Hero />
       </main>
       <HistoryTable />    

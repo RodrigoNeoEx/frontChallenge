@@ -14,21 +14,17 @@ const HistoryTable = () => {
     }
   }, [cepList, selected]);
 
-  if (cepList.length === 0) {
-    return (
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-2xl font-semibold tracking-tight text-primary sm:text-5xl">Salve suas pesquisas para poder consultar novamente abaixo.</h2>
-      </div>
-    );
-  }
 
   return (
-    <div className="px-6 sm:py-32 lg:px-8 relative">
+    <div className="px-6 lg:px-8 relative">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-balance text-3xl font-semibold tracking-tight text-primary sm:text-5xl">
-          Veja seu Histórico Salvo de Pesquisas:
+        <h2 className="text-balance text-3xl font-semibold tracking-tight text-primary ">
+        {cepList.length === 0 
+          ? 'Salve suas pesquisas para poder consultar novamente abaixo.'
+          : 'Selecione Abaixo seu Histórico Salvo de Pesquisas:'
+        }          
         </h2>
-
+        {cepList.length !== 0 &&
         <div className="relative mt-4">
           <Listbox value={selected} onChange={setSelected}>
             <div className="relative">
@@ -51,13 +47,14 @@ const HistoryTable = () => {
             </div>
           </Listbox>
 
-          {/* Exibe tabela com dados do CEP selecionado */}
+
           {selected && (
             <div className="mt-4">
               <Table data={selected} />
             </div>
           )}
         </div>
+         }
       </div>
     </div>
   );
