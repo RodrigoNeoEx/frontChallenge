@@ -61,7 +61,7 @@ const InputSection = () => {
   const alreadyExist = cepList.some((item: any) => normalizeCep(item.cep) === normalizeCep(value));
 
   return (
-    <div className="px-6 sm:py-32 lg:px-8">
+    <div className="px-6 sm:py-32 lg:px-8 pb-4">
       <form className="mx-auto mt-5 max-w-xl sm:mt-20" onSubmit={(e) => e.preventDefault()}>
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>

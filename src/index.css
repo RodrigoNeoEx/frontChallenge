@@ -2,7 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-body #root{
- height: 100vh;
+#root {
+  height: 100vh;
 }
 
+html, body {
+  overflow: hidden;
+}
+
+@media (max-width: 639px) {
+  html, body {
+      overflow: auto;
+  }
+}
